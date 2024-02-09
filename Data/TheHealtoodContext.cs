@@ -10,12 +10,16 @@ public class TheHealtoodContext : DbContext
 
     }
     public DbSet<Products> Products { get; set; }
-
+    public DbSet<Gallery> Gallery { get; set; }
 
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
+        modelBuilder.Entity<Products>()
+        .HasOne(x => x.gallery)
+        .WithOne(x => x.Product)
+        .HasForeignKey<Gallery>()
+        .IsRequired(true);
     }
 }

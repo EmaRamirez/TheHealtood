@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\TheHealtood.bundle.scp.css"
     },
     {
+      "Id": "D:\\emanu\\Manu\\Portfolio\\The Healtood\\TheHealtood\\wwwroot\\Images\\costillitadecerdoalariojana.jpg",
+      "PackagePath": "staticwebassets\\Images\\costillitadecerdoalariojana.jpg"
+    },
+    {
+      "Id": "D:\\emanu\\Manu\\Portfolio\\The Healtood\\TheHealtood\\wwwroot\\Images\\guisodelenteja.jpg",
+      "PackagePath": "staticwebassets\\Images\\guisodelenteja.jpg"
+    },
+    {
       "Id": "D:\\emanu\\Manu\\Portfolio\\The Healtood\\TheHealtood\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

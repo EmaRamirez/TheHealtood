@@ -20,6 +20,8 @@ public class Products
     [Display(Name = "Precio")]
     public double Price { get; set; }
 
+    public virtual Gallery gallery { get; set; }
+
     //listado de ingredientes
     //listado con la informacion nutricional
 
