@@ -1,0 +1,24 @@
+@using TheHealtood.ViewModels;
+
+@model ProductsCreateViewModel
+
+<div class="container" style="width: 600px;">
+    <div>
+        <h2 class="text-center">Ingreso de Producto</h2>
+    </div>
+    <div>
+        <form method="post" asp-action="Create" asp-controller="Products">
+            <div>
+                <label asp-for="Name" class="form-label"></label>
+                <input type="text" asp-for="Name" class="form-control">
+            </div>
+            <div>
+                <label asp-for="Price" class="form-label"></label>
+                <input type="text" asp-for="Price" class="form-control">
+            </div>
+            <div class="text-center" style="margin-top: 20px;">
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>

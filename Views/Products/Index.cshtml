@@ -2,3 +2,37 @@
 @model ProductsIndexViewModel
 
 
+<div class="container">
+    <div class="text-center">
+        <h2>Listado de Productos</h2>
+    </div>
+    <div>
+        <a asp-action="Create" class="btn btn-info">+</a>
+    </div>
+    <div>
+        <table class="table table">
+            <thead>
+                <tr>
+                    <td>@Html.DisplayNameFor(x => x.Products[0].Name)</td>
+                    <td>@Html.DisplayNameFor(x => x.Products[0].Price)</td>
+                    <td>Opciones</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in @Model.Products)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Price</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Detalle</a>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary">Modificar</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-warning"
+                                onclick="alert('¿Estas seguro de borrar este producto?')">Borrar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

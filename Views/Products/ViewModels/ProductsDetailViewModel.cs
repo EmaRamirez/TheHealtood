@@ -1,15 +1,15 @@
-
 using System.ComponentModel.DataAnnotations;
 
-namespace TheHealtood.Models;
+namespace TheHealtood.ViewModels;
 
-public class Products
+public class ProductsDetailViewModel
 {
-    public Products()
+    public ProductsDetailViewModel() { }
+    public ProductsDetailViewModel(int id)
     {
-
+        this.Id = id;
     }
-    public Products(string name, double price)
+    public ProductsDetailViewModel(int id, string name, double price) : this(id)
     {
         this.Name = name;
         this.Price = price;
@@ -19,9 +19,5 @@ public class Products
     public string Name { get; set; }
     [Display(Name = "Precio")]
     public double Price { get; set; }
-
-    //listado de ingredientes
-    //listado con la informacion nutricional
-
 
 }

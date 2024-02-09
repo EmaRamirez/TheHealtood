@@ -1,0 +1,20 @@
+@using TheHealtood.ViewModels;
+@model ProductsDetailViewModel
+
+<div class="container" style="width: 600px;">
+    <div>
+        <h2 class="text-center">@Model.Name</h2>
+    </div>
+    <div>
+        <label asp-for="Name" class="form-label"></label>
+        <input type="text" asp-for="Name" class="form-control">
+    </div>
+    <div>
+        <label asp-for="Price" class="form-label"></label>
+        <input type="text" asp-for="Price" class="form-control">
+    </div>
+    <div style="margin-top: 15px;" class="text-center">
+        <a asp-action="Index" class="btn btn-info">Volver</a>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Modificar</a>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TheHealtood.Data;
+using TheHealtood.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<TheHealtoodContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("TheHealtood")));
-
+builder.Services.AddScoped<IProductService, ProductService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
