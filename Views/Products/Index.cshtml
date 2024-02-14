@@ -1,5 +1,5 @@
 @using TheHealtood.ViewModels;
-@model ProductsIndexViewModel
+@model IEnumerable<ProductsIndexViewModel>
 
 
 <div class="container">
@@ -13,18 +13,23 @@
         <table class="table table">
             <thead>
                 <tr>
-                    <td>@Html.DisplayNameFor(x => x.Products[0].Name)</td>
-                    <td>@Html.DisplayNameFor(x => x.Products[0].Price)</td>
-                    <td>Fotos</td>
+                    <td>@Html.DisplayNameFor(x => x.Name)</td>
+                    <td>@Html.DisplayNameFor(x => x.Price)</td>
+                    <td>@Html.DisplayNameFor(x => x.Url)</td>
+
                     <td>Opciones</td>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in @Model.Products)
+                @foreach (var item in @Model)
                 {
                     <tr>
                         <td>@item.Name</td>
                         <td>@item.Price</td>
+                        <td>
+                            <img src="@item.Url" alt="" width="100px">
+                        </td>
+
                         <td>
                             <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Detalle</a>
                             <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary">Modificar</a>

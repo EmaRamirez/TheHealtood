@@ -13,6 +13,11 @@
         <label asp-for="Price" class="form-label"></label>
         <input type="text" asp-for="Price" class="form-control">
     </div>
+    <div>
+        <label asp-for="Url" class="form-label"></label>
+        <br>
+        <img src="@Model.Url" alt="" width="250px">
+    </div>
     <div style="margin-top: 15px;" class="text-center">
         <a asp-action="Index" class="btn btn-info">Volver</a>
         <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Modificar</a>

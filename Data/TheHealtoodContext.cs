@@ -19,7 +19,6 @@ public class TheHealtoodContext : DbContext
         modelBuilder.Entity<Products>()
         .HasOne(x => x.gallery)
         .WithOne(x => x.Product)
-        .HasForeignKey<Gallery>()
-        .IsRequired(true);
+        .IsRequired();
     }
 }

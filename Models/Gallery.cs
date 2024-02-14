@@ -1,18 +1,19 @@
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TheHealtood.Models;
 
 public class Gallery
 {
-    public int Id { get; set; }
+    [Key]
+    [Column("id")]
+    public int GalleryId { get; set; }
 
     public string Name { get; set; }
 
-    public byte[] archivo { get; set; }
+    public byte[] Datos { get; set; }
 
     public string Extension { get; set; }
-    [NotMapped]
-    public virtual IFormFile image { get; set; }
 
     public virtual Products Product { get; set; }
 }

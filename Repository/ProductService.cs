@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using TheHealtood.Data;
 using TheHealtood.Models;
 
@@ -7,17 +8,20 @@ public class ProductService : IProductService
 {
 
     private readonly TheHealtoodContext _context;
+    
 
     public ProductService(TheHealtoodContext context)
     {
         this._context = context;
+      
     }
 
     //TODO -- HACER VERIFICACIONES PARA VER QUE NO SE CARGUEN DATOS IGUALES
-    public void Create(Products obj)
+    public void Create(Products value)
     {
-        _context.Products.Add(obj);
+        _context.Products.Add(value);
         _context.SaveChanges();
+
     }
 
     public void Delete(int id)
@@ -33,12 +37,13 @@ public class ProductService : IProductService
         {
             query = query.Where(x => x.Name.Contains(Filter));
         }
-        return query.ToList();
+
+        return query.Include(x => x.gallery).ToList();
     }
 
     public Products GetById(int id)
     {
-        var detail = GetQuery().FirstOrDefault(x => x.Id == id);
+        var detail = GetQuery().Include(x => x.gallery).FirstOrDefault(x => x.Id == id);
         return detail;
 
     }
@@ -47,7 +52,7 @@ public class ProductService : IProductService
     {
         Delete(id);
 
-        Create(obj);
+        //  Create(obj);
     }
 
     private IQueryable<Products> GetQuery() => from query in _context.Products select query;

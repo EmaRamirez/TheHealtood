@@ -8,7 +8,7 @@ public interface IProductService
 
     Products GetById(int id);
 
-    void Create(Products obj);
+    void Create(Products value);
 
     void Update(int id, Products obj);
 

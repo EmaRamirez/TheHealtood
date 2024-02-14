@@ -2,19 +2,23 @@
 
 @model ProductsCreateViewModel
 
+
 <div class="container" style="width: 600px;">
     <div>
         <h2 class="text-center">Ingreso de Producto</h2>
     </div>
     <div>
-        <form method="post" asp-action="Create" asp-controller="Products">
+        <form method="post" asp-action="Create" asp-controller="Products" enctype="multipart/form-data">
             <div>
-                <label asp-for="Name" class="form-label"></label>
+                @Html.LabelFor(x => x.Name, new { @class = "form-label" })
                 <input type="text" asp-for="Name" class="form-control">
             </div>
             <div>
                 <label asp-for="Price" class="form-label"></label>
                 <input type="text" asp-for="Price" class="form-control">
+            </div>
+            <div>
+                <input type="file" name="image" asp-for="image">
             </div>
             <div class="text-center" style="margin-top: 20px;">
                 <button type="submit" class="btn btn-success">Guardar</button>

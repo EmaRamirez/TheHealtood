@@ -10,8 +10,8 @@ using TheHealtood.Data;
 namespace TheHealtood.Migrations
 {
     [DbContext(typeof(TheHealtoodContext))]
-    [Migration("20240209195849_AddGalleryAndFkWithProducts")]
-    partial class AddGalleryAndFkWithProducts
+    [Migration("20240214160901_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,8 +21,14 @@ namespace TheHealtood.Migrations
 
             modelBuilder.Entity("TheHealtood.Models.Gallery", b =>
                 {
-                    b.Property<int>("Id")
-                        .HasColumnType("INTEGER");
+                    b.Property<int>("GalleryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("id");
+
+                    b.Property<byte[]>("Datos")
+                        .IsRequired()
+                        .HasColumnType("BLOB");
 
                     b.Property<string>("Extension")
                         .IsRequired()
@@ -32,11 +38,7 @@ namespace TheHealtood.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<byte[]>("archivo")
-                        .IsRequired()
-                        .HasColumnType("BLOB");
-
-                    b.HasKey("Id");
+                    b.HasKey("GalleryId");
 
                     b.ToTable("Gallery");
                 });
@@ -45,6 +47,9 @@ namespace TheHealtood.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("GalleryId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
@@ -56,23 +61,26 @@ namespace TheHealtood.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GalleryId")
+                        .IsUnique();
+
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("TheHealtood.Models.Gallery", b =>
-                {
-                    b.HasOne("TheHealtood.Models.Products", "Product")
-                        .WithOne("gallery")
-                        .HasForeignKey("TheHealtood.Models.Gallery", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("TheHealtood.Models.Products", b =>
                 {
-                    b.Navigation("gallery")
+                    b.HasOne("TheHealtood.Models.Gallery", "gallery")
+                        .WithOne("Product")
+                        .HasForeignKey("TheHealtood.Models.Products", "GalleryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("gallery");
+                });
+
+            modelBuilder.Entity("TheHealtood.Models.Gallery", b =>
+                {
+                    b.Navigation("Product")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

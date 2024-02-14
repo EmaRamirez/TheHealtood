@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "YMTZv2u9lKDDCBLVk4sbBNiW125C0+TwGM7teitZ3Hk=",
+  "Hash": "JGLvc6saMnHxua8PKI2U6341Fq7D9DxePqzyNdv2870=",
   "Source": "TheHealtood",
   "BasePath": "_content/TheHealtood",
   "Mode": "Default",
@@ -83,40 +83,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
-    },
-    {
-      "Identity": "D:\\emanu\\Manu\\Portfolio\\The Healtood\\TheHealtood\\wwwroot\\Images\\costillitadecerdoalariojana.jpg",
-      "SourceId": "TheHealtood",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\emanu\\Manu\\Portfolio\\The Healtood\\TheHealtood\\wwwroot\\",
-      "BasePath": "_content/TheHealtood",
-      "RelativePath": "Images/costillitadecerdoalariojana.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Images\\costillitadecerdoalariojana.jpg"
-    },
-    {
-      "Identity": "D:\\emanu\\Manu\\Portfolio\\The Healtood\\TheHealtood\\wwwroot\\Images\\guisodelenteja.jpg",
-      "SourceId": "TheHealtood",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\emanu\\Manu\\Portfolio\\The Healtood\\TheHealtood\\wwwroot\\",
-      "BasePath": "_content/TheHealtood",
-      "RelativePath": "Images/guisodelenteja.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Images\\guisodelenteja.jpg"
     },
     {
       "Identity": "D:\\emanu\\Manu\\Portfolio\\The Healtood\\TheHealtood\\wwwroot\\js\\site.js",
