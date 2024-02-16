@@ -10,6 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<TheHealtoodContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("TheHealtood")));
 builder.Services.AddScoped<IGalleryService, GalleryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IIngredientService, IngredientService>();
 
 var app = builder.Build();
 

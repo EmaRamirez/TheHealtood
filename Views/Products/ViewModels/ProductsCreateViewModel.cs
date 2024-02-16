@@ -11,6 +11,8 @@ public class ProductsCreateViewModel
     public string Name { get; set; }
     [Display(Name = "Precio")]
     public double Price { get; set; }
+    [Display(Name = "Ingredientes")]
+    public List<Ingredient> Ingredients { get; set; }
 
     public IFormFile image { get; set; }
 }

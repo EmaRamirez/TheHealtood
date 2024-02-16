@@ -1,0 +1,30 @@
+@using TheHealtood.ViewModels;
+@model IngredientCreateViewModel
+@{
+    var foodGroups = new[]{
+new SelectListItem(value:"0",text:TheHealtood.Utils.FoodGroups.CarnesyDerivados.ToString().Replace("y"," y ")),
+new SelectListItem(value:"1",text:TheHealtood.Utils.FoodGroups.LacteosyDerivados.ToString().Replace("y"," y ")),
+new SelectListItem(value:"2",text:TheHealtood.Utils.FoodGroups.CerealesyDerivados.ToString().Replace("y"," y ")),
+new SelectListItem(value:"3",text:TheHealtood.Utils.FoodGroups.FrutasyVerduras.ToString().Replace("y"," y ")),
+new SelectListItem(value:"4",text:TheHealtood.Utils.FoodGroups.GrasasyAceites.ToString().Replace("y"," y ")),
+new SelectListItem(value:"5",text:TheHealtood.Utils.FoodGroups.AzucaresyDulces.ToString().Replace("y"," y "))
+};
+
+}
+<div style="width: 500px; margin:auto;">
+    <div>
+        <form method="post" asp-action="Create">
+            <div class="form-group">
+                <label asp-for="Name" class="form-label"></label>
+                <input type="text" asp-for="Name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="foodGroups" class="form-label"></label>
+                <select asp-for="foodGroups" asp-items="foodGroups" class="form-control"></select>
+            </div>
+            <div class="mb-3 text-center">
+                <button type=" submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>

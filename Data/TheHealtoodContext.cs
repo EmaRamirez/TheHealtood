@@ -12,6 +12,8 @@ public class TheHealtoodContext : DbContext
     public DbSet<Products> Products { get; set; }
     public DbSet<Gallery> Gallery { get; set; }
 
+    public DbSet<Ingredient> Ingredients { get; set; }
+
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -20,5 +22,11 @@ public class TheHealtoodContext : DbContext
         .HasOne(x => x.gallery)
         .WithOne(x => x.Product)
         .IsRequired();
+
+        modelBuilder.Entity<Products>()
+        .HasMany(x => x.Ingredients)
+        .WithMany(x => x.ListProducts)
+        .UsingEntity("ProductsWithIngredients");
+
     }
 }

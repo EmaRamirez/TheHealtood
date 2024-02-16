@@ -25,7 +25,9 @@ public class Products
 
     public virtual Gallery gallery { get; set; }
 
-    //listado de ingredientes
+    public List<Ingredient> Ingredients { get; set; }
+
+    
     //listado con la informacion nutricional
 
 

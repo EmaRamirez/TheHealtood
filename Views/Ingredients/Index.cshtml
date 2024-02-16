@@ -1,0 +1,58 @@
+@using TheHealtood.ViewModels;
+@model IngredientIndexViewModel
+
+<div>
+    <div>
+        <h2>Ingredientes de los Productos</h2>
+    </div>
+    <div>
+        <a asp-action="Create" asp-controller="Ingredients" class="btn btn-danger">Agregar</a>
+    </div>
+    <div>
+        <table class="table table">
+            <thead>
+                <tr>
+                    <td>@Html.DisplayNameFor(x => x.Ingredientes[0].Id)</td>
+                    <td>@Html.DisplayNameFor(x => x.Ingredientes[0].Name)</td>
+                    <td>
+                        <form method="get" asp-action="Index">
+                            <select style="border: transparent;" asp-for="Filter">
+                                <option value="">Tipo de alimento </option>
+                                <option value="CarnesyDerivados">Carnes y Derivados </option>
+                                <option value="LacteosyDerivados">Lacteos y Derivados</option>
+                                <option value="CerealesyDerivados">Cereales y Derivados</option>
+                                <option value="FrutasyVerduras">Frutas y Verduras</option>
+                                <option value="GrasasyAceites">Grasas y Aceites</option>
+                                <option value="AzucaresyDulces">Azucares y Dulces</option>
+                            </select>
+                            <button type="submit" style="border: transparent; background-color:transparent">▲</button>
+                        </form>
+                    </td>
+                    <td>@Html.DisplayNameFor(x => x.Ingredientes[0].ListProducts[0].Name)</td>
+                    <td>Opciones</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in @Model.Ingredientes)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.FoodGroups.Replace("y", " y ")</td>
+                        <td>
+                            @foreach (var value in item.ListProducts)
+                            {
+                                @value.Name
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.Id"
+                                onclick="alert('¿Estas seguro de borrar este ingrediente?')"
+                                class="btn btn-primary">Borrar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

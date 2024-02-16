@@ -1,6 +1,5 @@
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using TheHealtood.Models;
 using TheHealtood.Repository;
 using TheHealtood.ViewModels;
@@ -11,12 +10,14 @@ namespace TheHealtood.Controllers;
 
 public class ProductsController : Controller
 {
+    private readonly IIngredientService _IngreServ;
     private readonly IProductService _ProductServ;
     private readonly IGalleryService _GalleryServ;
-    public ProductsController(IProductService ProductServ, IGalleryService GalleryServ)
+    public ProductsController(IProductService ProductServ, IGalleryService GalleryServ, IIngredientService IngreServ)
     {
         this._ProductServ = ProductServ;
         this._GalleryServ = GalleryServ;
+        this._IngreServ = IngreServ;
     }
 
     public IActionResult Index(string Filter)
@@ -36,6 +37,7 @@ public class ProductsController : Controller
     [HttpGet]
     public IActionResult Create()
     {
+        ViewData["Ingredients"] = new SelectList(_IngreServ.GetAll(), "Id", "Name");
         return View();
     }
     [HttpPost]
