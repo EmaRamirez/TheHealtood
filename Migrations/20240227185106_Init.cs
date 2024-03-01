@@ -61,24 +61,24 @@ namespace TheHealtood.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductsWithIngredients",
+                name: "ProductWithIngredients",
                 columns: table => new
                 {
-                    IngredientsId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ListProductsId = table.Column<int>(type: "INTEGER", nullable: false)
+                    IngredientId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProductId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductsWithIngredients", x => new { x.IngredientsId, x.ListProductsId });
+                    table.PrimaryKey("PK_ProductWithIngredients", x => new { x.IngredientId, x.ProductId });
                     table.ForeignKey(
-                        name: "FK_ProductsWithIngredients_Ingredients_IngredientsId",
-                        column: x => x.IngredientsId,
+                        name: "FK_ProductWithIngredients_Ingredients_IngredientId",
+                        column: x => x.IngredientId,
                         principalTable: "Ingredients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductsWithIngredients_Products_ListProductsId",
-                        column: x => x.ListProductsId,
+                        name: "FK_ProductWithIngredients_Products_ProductId",
+                        column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -91,16 +91,16 @@ namespace TheHealtood.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductsWithIngredients_ListProductsId",
-                table: "ProductsWithIngredients",
-                column: "ListProductsId");
+                name: "IX_ProductWithIngredients_ProductId",
+                table: "ProductWithIngredients",
+                column: "ProductId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ProductsWithIngredients");
+                name: "ProductWithIngredients");
 
             migrationBuilder.DropTable(
                 name: "Ingredients");

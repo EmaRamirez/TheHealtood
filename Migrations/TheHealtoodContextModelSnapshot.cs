@@ -16,21 +16,6 @@ namespace TheHealtood.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.14");
 
-            modelBuilder.Entity("ProductsWithIngredients", b =>
-                {
-                    b.Property<int>("IngredientsId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ListProductsId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("IngredientsId", "ListProductsId");
-
-                    b.HasIndex("ListProductsId");
-
-                    b.ToTable("ProductsWithIngredients");
-                });
-
             modelBuilder.Entity("TheHealtood.Models.Gallery", b =>
                 {
                     b.Property<int>("GalleryId")
@@ -74,6 +59,21 @@ namespace TheHealtood.Migrations
                     b.ToTable("Ingredients");
                 });
 
+            modelBuilder.Entity("TheHealtood.Models.ProductWithIngredients", b =>
+                {
+                    b.Property<int>("IngredientId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("IngredientId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductWithIngredients");
+                });
+
             modelBuilder.Entity("TheHealtood.Models.Products", b =>
                 {
                     b.Property<int>("Id")
@@ -98,19 +98,23 @@ namespace TheHealtood.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("ProductsWithIngredients", b =>
+            modelBuilder.Entity("TheHealtood.Models.ProductWithIngredients", b =>
                 {
-                    b.HasOne("TheHealtood.Models.Ingredient", null)
-                        .WithMany()
-                        .HasForeignKey("IngredientsId")
+                    b.HasOne("TheHealtood.Models.Ingredient", "Ingredient")
+                        .WithMany("ProductWithIngredients")
+                        .HasForeignKey("IngredientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TheHealtood.Models.Products", null)
-                        .WithMany()
-                        .HasForeignKey("ListProductsId")
+                    b.HasOne("TheHealtood.Models.Products", "Products")
+                        .WithMany("ProductWithIngredients")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Ingredient");
+
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("TheHealtood.Models.Products", b =>
@@ -128,6 +132,16 @@ namespace TheHealtood.Migrations
                 {
                     b.Navigation("Product")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TheHealtood.Models.Ingredient", b =>
+                {
+                    b.Navigation("ProductWithIngredients");
+                });
+
+            modelBuilder.Entity("TheHealtood.Models.Products", b =>
+                {
+                    b.Navigation("ProductWithIngredients");
                 });
 #pragma warning restore 612, 618
         }

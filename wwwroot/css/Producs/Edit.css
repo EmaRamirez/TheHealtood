@@ -1,0 +1,22 @@
+
+.container-file{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+.container-listIngre{
+    width: 300px;
+    height: 400px;
+}
+
+.container-check {
+    width: 300px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    background-color: #F8F9F9;
+}

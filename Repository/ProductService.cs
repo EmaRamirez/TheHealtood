@@ -1,6 +1,11 @@
+using System.Linq;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using TheHealtood.Data;
 using TheHealtood.Models;
+
 
 namespace TheHealtood.Repository;
 
@@ -8,12 +13,12 @@ public class ProductService : IProductService
 {
 
     private readonly TheHealtoodContext _context;
-    
+
 
     public ProductService(TheHealtoodContext context)
     {
         this._context = context;
-      
+
     }
 
     //TODO -- HACER VERIFICACIONES PARA VER QUE NO SE CARGUEN DATOS IGUALES
@@ -43,17 +48,21 @@ public class ProductService : IProductService
 
     public Products GetById(int id)
     {
-        var detail = GetQuery().Include(x => x.gallery).FirstOrDefault(x => x.Id == id);
+        var detail = GetQuery().Include(x => x.Ingredients).Include(x => x.gallery).FirstOrDefault(x => x.Id == id);
         return detail;
 
     }
 
-    public void Update(int id, Products obj)
+    public async void Update(Products obj)
     {
-        Delete(id);
 
-        //  Create(obj);
+        _context.Products.Update(obj);
+        _context.SaveChanges();
+
+
+
     }
+
 
     private IQueryable<Products> GetQuery() => from query in _context.Products select query;
 

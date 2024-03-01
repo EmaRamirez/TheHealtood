@@ -10,7 +10,7 @@ public interface IProductService
 
     void Create(Products value);
 
-    void Update(int id, Products obj);
+    void Update(Products obj);
 
     void Delete(int id);
 }

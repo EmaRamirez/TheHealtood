@@ -50,6 +50,18 @@ public class IngredientService : IIngredientService
         Create(obj);
     }
 
+    public List<Ingredient> AddIngre(List<int> obj)
+    {
+        var list = new List<Ingredient>();
+        for (int i = 0; i < obj.Count; i++)
+        {
+            list.Add(GetById(obj[i]));
+        }
+        return list;
+    }
+
+
+
     private IQueryable<Ingredient> GetQuery() => from query in _context.Ingredients select query;
 
 

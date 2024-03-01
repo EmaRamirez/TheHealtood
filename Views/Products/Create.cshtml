@@ -18,10 +18,11 @@
                 <input type="text" asp-for="Price" class="form-control">
             </div>
             <div>
-                <label asp-for="Ingredients" class="form-label"></label>
-                <select multiple asp-for="Ingredients" asp-items="@ViewBag.Ingredients" class="form-control"></select>
-
+                <select multiple asp-for="IngredientsId" asp-items="@ViewBag.Ingredients"
+                    class="form-control"></select>
             </div>
+
+
             <div>
                 <input type="file" name="image" asp-for="image">
             </div>

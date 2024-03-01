@@ -12,8 +12,12 @@ public class GalleryService : IGalleryService
     }
     public Gallery Create(IFormFile obj)
     {
-        var name = Path.GetFileNameWithoutExtension(obj.FileName);
-        var extension = Path.GetExtension(obj.FileName);
+        if (obj == null)
+        {
+            return null;
+        }
+        var name = Path.GetFileNameWithoutExtension(obj.FileName);//NOMBRE
+        var extension = Path.GetExtension(obj.FileName);//EXTENSION
 
         MemoryStream ms = new MemoryStream();
 
@@ -24,21 +28,27 @@ public class GalleryService : IGalleryService
             obj.CopyToAsync(ms);
 
 
-            datos = ms.ToArray();
+            datos = ms.ToArray();//DATOS
+        }
+        if (Verification(datos) == false)
+        {
+            var galeria = new Gallery
+            {
+                Name = name,
+                Extension = extension,
+                Datos = datos
+            };
+
+            _context.Gallery.Add(galeria);
+            _context.SaveChanges();
+            return galeria;
+        }
+        else
+        {
+            return _context.Gallery.First(x => x.Datos == datos);
         }
 
 
-        var galeria = new Gallery
-        {
-            Name = name,
-            Extension = extension,
-            Datos = datos
-        };
-
-        _context.Gallery.Add(galeria);
-        _context.SaveChanges();
-
-        return galeria;
     }
 
     public void Delete(int id)
@@ -46,5 +56,11 @@ public class GalleryService : IGalleryService
         var detail = _context.Gallery.FirstOrDefault(x => x.GalleryId == id);
         _context.Gallery.Remove(detail);
         //_context.SaveChanges();
+    }
+
+    private bool Verification(byte[] datos)
+    {
+        bool veri = _context.Gallery.ToList().Any(x => x.Datos == datos);
+        return veri;
     }
 }

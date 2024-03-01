@@ -1,13 +1,15 @@
 @using TheHealtood.ViewModels;
-@model ProductsDetailViewModel
+
+@model ProductEditViewModel
+
 
 <div class="container" style="width: 600px;">
+    <div>
+        <h2 class="text-center">@Model.Name</h2>
+    </div>
     <form method="post" asp-action="Edit">
         <div>
-            <input type="text" asp-for="Id" hidden >
-        </div>
-        <div>
-            <h2 class="text-center">@Model.Name</h2>
+            <input type="text" asp-for="Id" hidden>
         </div>
         <div>
             <label asp-for="Name" class="form-label"></label>
@@ -17,7 +19,28 @@
             <label asp-for="Price" class="form-label"></label>
             <input type="text" asp-for="Price" class="form-control">
         </div>
-        <div style="margin-top: 15px;" class="text-center">
+        <div class="container-file">
+            <label asp-for="Url" class="form-label"></label>
+            <img src="@Model.Url" alt="" width="150px">
+            <input type="file" asp-for="image">
+        </div>
+        <div class="container-listIngre">
+            <label asp-for="listIngr" style="height: 50px;"></label>
+            <div class="container-check">
+                @for (var i = 0; i < Model.listIngr.Count(); i++)
+                {
+                    <div>
+                        @Html.CheckBoxFor(x => x.listIngr[i].seleted)
+                        @Model.listIngr[i].Name
+                        @Html.HiddenFor(x => x.listIngr[i].Id)
+                        @Html.HiddenFor(x => x.listIngr[i].Name)
+                        @Html.HiddenFor(x => x.listIngr[i].FoodGroups)
+                        @Html.HiddenFor(x => x.listIngr[i].ListProducts)
+                    </div>
+                }
+            </div>
+        </div>
+        <div style="margin-top: 15px;" class="text-center" class="container-edit">
             <a asp-action="Index" class="btn btn-info">Volver</a>
             <button type="submit" class="btn btn-primary">Guardar</button>
         </div>

@@ -14,4 +14,5 @@ public interface IIngredientService
     void Update(Ingredient obj);
 
     void Delete(int id);
+    List<Ingredient> AddIngre(List<int> obj);
 }

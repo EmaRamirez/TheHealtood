@@ -45,14 +45,9 @@ public class IngredientsController : Controller
         {
             return View();
         }
+        
+        var model = new Ingredient(obj.Name, obj.foodGroups.ToString());
 
-        var model = new Ingredient()
-        {
-            Name = obj.Name,
-            FoodGroups = obj.foodGroups.ToString(),
-            foodGroups = obj.foodGroups
-
-        };
         _IngreServ.Create(model);
 
         return RedirectToAction("Index");

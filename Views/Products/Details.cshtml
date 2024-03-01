@@ -18,6 +18,16 @@
         <br>
         <img src="@Model.Url" alt="" width="250px">
     </div>
+    <div>
+        <label asp-for="ingredients" class="form-label"></label>
+        <ul>
+            @foreach (var item in @Model.ingredients)
+            {
+                <li>@item.Name</li>
+            }
+        </ul>
+
+    </div>
     <div style="margin-top: 15px;" class="text-center">
         <a asp-action="Index" class="btn btn-info">Volver</a>
         <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Modificar</a>

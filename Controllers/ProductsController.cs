@@ -13,11 +13,13 @@ public class ProductsController : Controller
     private readonly IIngredientService _IngreServ;
     private readonly IProductService _ProductServ;
     private readonly IGalleryService _GalleryServ;
+
     public ProductsController(IProductService ProductServ, IGalleryService GalleryServ, IIngredientService IngreServ)
     {
         this._ProductServ = ProductServ;
         this._GalleryServ = GalleryServ;
         this._IngreServ = IngreServ;
+
     }
 
     public IActionResult Index(string Filter)
@@ -37,7 +39,8 @@ public class ProductsController : Controller
     [HttpGet]
     public IActionResult Create()
     {
-        ViewData["Ingredients"] = new SelectList(_IngreServ.GetAll(), "Id", "Name");
+        ViewData["ingredients"] = new SelectList(_IngreServ.GetAll(), "Id", "Name");
+
         return View();
     }
     [HttpPost]
@@ -50,7 +53,11 @@ public class ProductsController : Controller
 
         var gallery = _GalleryServ.Create(obj.image);
 
+        var ListIngre = _IngreServ.AddIngre(obj.IngredientsId);
+
         var prod = new Products(obj.Name, obj.Price, gallery.GalleryId);
+        prod.Ingredients = ListIngre;
+
         _ProductServ.Create(prod);
         return RedirectToAction("Index");
 
@@ -73,7 +80,7 @@ public class ProductsController : Controller
         var url = String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(detail.gallery.Datos));
 
 
-        var model = new ProductsDetailViewModel(detail.Id, detail.Name, detail.Price, url);
+        var model = new ProductsDetailViewModel(detail.Id, detail.Name, detail.Price, url, detail.Ingredients);
         return View(model);
     }
 
@@ -81,18 +88,59 @@ public class ProductsController : Controller
     public IActionResult Edit(int id)
     {
         var details = _ProductServ.GetById(id);
-        var model = new ProductsDetailViewModel(details.Id, details.Name, details.Price, details.gallery.Name);
+        var url = String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(details.gallery.Datos));
+
+        var model = new ProductEditViewModel
+        {
+            Id = details.Id,
+            Name = details.Name,
+            Price = details.Price,
+            Url = url,
+            listIngr = _IngreServ.GetAll()
+        };
+        foreach (var item in model.listIngr)
+        {
+            if (item.ListProducts.Contains(details))
+            {
+                item.seleted = true;
+            }
+        }
         return View(model);
     }
 
-    public IActionResult Edit([FromForm] ProductsDetailViewModel obj)
+    public IActionResult Edit([FromForm] ProductEditViewModel obj)
     {
+
         if (!ModelState.IsValid)
         {
             return View();
         }
-        //var product = new Products(obj.Name, obj.Price);
-        // _ProductServ.Update(obj.Id, product);
+        var details = _ProductServ.GetById(obj.Id);
+
+        var image = obj.image != null ? _GalleryServ.Create(obj.image) : details.gallery;
+
+        var list = new List<Ingredient>();
+        for (int i = 0; i < obj.listIngr.Count(); i++)
+        {
+            if (obj.listIngr[i].seleted == true)
+            {
+                list.Add(new Ingredient(obj.listIngr[i].Name, obj.listIngr[i].FoodGroups));
+            }
+        }
+
+        var producEdit = new Products(obj.Id, obj.Name, obj.Price, image.GalleryId, list);
+
+
+        _ProductServ.Update(producEdit);
+
+
+
+        //TO DO: SE ENCOTRO EL PROBLEMA, CUANDO HAGO EL UPDATE, ME DUPLICA LOS DATOS DE LOS INGREDIENTES
+
+
+
+
+
         return RedirectToAction("Index");
     }
 
