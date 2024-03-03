@@ -43,8 +43,7 @@ public class Products
 
     public virtual Gallery gallery { get; set; }
 
-    public int? CartId { get; set; }
-    public virtual Cart Cart { get; set; }
+    public virtual Cart? Cart { get; set; } = null;
 
     public virtual List<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
     public virtual List<ProductWithIngredients> ProductWithIngredients { get; set; } = new List<ProductWithIngredients>();

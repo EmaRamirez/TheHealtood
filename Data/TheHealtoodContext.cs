@@ -16,6 +16,8 @@ public class TheHealtoodContext : DbContext
     public DbSet<Ingredient> Ingredients { get; set; }
     public DbSet<ProductWithIngredients> ProductWithIngredients { get; set; }
 
+    public DbSet<Cart> Cart { get; set; }
+
 
 
 
@@ -46,7 +48,11 @@ public class TheHealtoodContext : DbContext
 
 
 
-
+        modelBuilder.Entity<Products>()
+        .HasOne(x => x.Cart)
+        .WithMany(x => x.ListProd)
+        .IsRequired(false)
+        .OnDelete(DeleteBehavior.NoAction);
 
     }
 }

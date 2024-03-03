@@ -6,7 +6,7 @@ public interface IProductService
 {
     List<Products> GetAllProducts(string Filter);
 
-    Products GetById(int id);
+    Products GetById(int? id);
 
     void Create(Products value);
 

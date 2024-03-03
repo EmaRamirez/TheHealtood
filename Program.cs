@@ -11,6 +11,7 @@ builder.Services.AddDbContext<TheHealtoodContext>(options => options.UseSqlite(b
 builder.Services.AddScoped<IGalleryService, GalleryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IIngredientService, IngredientService>();
+builder.Services.AddScoped<ICartService,CartService>();
 
 
 var app = builder.Build();

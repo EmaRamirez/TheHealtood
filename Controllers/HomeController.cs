@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.EntityFrameworkCore.Storage;
 using TheHealtood.Models;
 using TheHealtood.Repository;
 using TheHealtood.ViewModels;
@@ -14,11 +15,13 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IProductService _productService;
+    private readonly ICartService _cartService;
 
-    public HomeController(ILogger<HomeController> logger, IProductService productService)
+    public HomeController(ILogger<HomeController> logger, IProductService productService, ICartService cartService)
     {
         _logger = logger;
         this._productService = productService;
+        this._cartService = cartService;
     }
 
     public IActionResult Index()
@@ -76,15 +79,46 @@ public class HomeController : Controller
         return View(model);
     }
 
+    public IActionResult GetCarrito(int? id)
+    {
+        if (id == null)
+        {
+            var mostrar = _cartService.GetCart();
+            if (mostrar is null)
+            {
+                var m = new Cart();
+                return View(m);
+            }
+            return View(mostrar);
+        }
+        Cart ListAll = new Cart();
 
-    public IActionResult GetCarrito(int id)
+        if ((ListAll = _cartService.GetCart()) is null)
+        {
+            var product = _productService.GetById(id.Value);
+            var listProd = new List<Products>();
+            listProd.Add(product);
+            var model = new Cart();
+            model.ListProd = listProd;
+
+
+            return View(_cartService.AddProduct(model));
+        }
+        var pro = _productService.GetById(id);
+
+        ListAll.ListProd.Add(pro);
+        var send = _cartService.UpdateCart(ListAll);
+        return View(send);
+    }
+    public IActionResult PostCarrito(int id)
     {
-        var listProd = new List<int>();
-        listProd.Add(id);
+        if (id == 1)
+        {
+            _cartService.DeleteCart();
+            return RedirectToAction("Index");
+        }
         return View();
     }
-    public IActionResult PostCarrito(List<int> obj)
-    {
-        return View();
-    }
+
+    
 }

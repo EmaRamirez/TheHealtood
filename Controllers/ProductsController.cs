@@ -54,9 +54,11 @@ public class ProductsController : Controller
         var gallery = _GalleryServ.Create(obj.image);
 
         var ListIngre = _IngreServ.AddIngre(obj.IngredientsId);
+        var cart = new Cart();
 
         var prod = new Products(obj.Name, obj.Price, gallery.GalleryId);
         prod.Ingredients = ListIngre;
+        //prod.Cart = cart;
 
         _ProductServ.Create(prod);
         return RedirectToAction("Index");

@@ -1,0 +1,76 @@
+@model Cart
+@{
+    var aviso = @Model.ListProd == null ? false : true;
+
+    var total = aviso is true ? @Model.ListProd.Sum(x => x.Price) : 0;
+}
+@if (aviso is false)
+{
+    <h2>El carrito esta vacio</h2>
+}
+else
+{
+    <div>
+        <table class="table table" style="width: 500px;">
+            <thead>
+                <tr>
+                    <td>@Html.DisplayNameFor(x => x.ListProd[0].Name)</td>
+                    <td>@Html.DisplayNameFor(x => x.ListProd[0].Price)</td>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ListProd)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>$@item.Price</td>
+                    </tr>
+                }
+                <tr>
+                    <td>Total</td>
+                    <td>$@total</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <form asp-action="PostCarrito" method="post" asp-controller="Home" style="width: 500px;">
+            <div>
+                <div>
+                    <input type="checkbox"> <img src="/Images/Visa.jpeg" alt="" style="width: 70px;">
+                </div>
+                <div>
+                    <input type="checkbox"> <img src="/Images/Mastercard.jpeg" alt="" style="width: 70px;">
+                </div>
+            </div>
+            <div>
+                <label for="Name" class="form-label">Nombre y Apellido</label>
+                <input type="text" id="Name" class="form-control">
+            </div>
+            <div>
+                <label for="Tarjeta" class="form-label">Numero de Tarjeta</label>
+                <input type="tel" id="Tarjeta" class="form-control">
+            </div>
+            <div style="display: flex;">
+                <div>
+                    <label for="Codigo"class="form-label">Codigo</label>
+                    <input type="tel" id="Codigo"class="form-control">
+                </div>
+                <div>
+                    <label for="Mes"class="form-label">Mes de Vencimiento</label>
+                    <input type="date" id="Mes"class="form-control">
+                    </div>
+            </div>
+
+        </form>
+        <a asp-action="PostCarrito" asp-controller="Home" asp-route-id="1" class="btn btn-danger">Pagar</a>
+    </div>
+
+}
+
+
+
+
+<a asp-action="Index" asp-controller="Home" class="btn btn-primary">Seguir comprando</a>
+

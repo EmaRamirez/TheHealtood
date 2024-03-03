@@ -46,7 +46,7 @@ public class ProductService : IProductService
         return query.Include(x => x.gallery).Include(x => x.Ingredients).ToList();
     }
 
-    public Products GetById(int id)
+    public Products GetById(int? id)
     {
         var detail = GetQuery().Include(x => x.Ingredients).Include(x => x.gallery).FirstOrDefault(x => x.Id == id);
         return detail;
