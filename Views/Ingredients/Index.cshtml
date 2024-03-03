@@ -1,6 +1,9 @@
 @using TheHealtood.ViewModels;
 @model IngredientIndexViewModel
+@{
 
+
+}
 <div>
     <div>
         <h2>Ingredientes de los Productos</h2>
@@ -28,7 +31,7 @@
                             <button type="submit" style="border: transparent; background-color:transparent">▲</button>
                         </form>
                     </td>
-                    <td>@Html.DisplayNameFor(x => x.Ingredientes[0].ListProducts[0].Name)</td>
+                    <td>@Html.DisplayNameFor(x => x.Ingredientes[0].ListProducts)</td>
                     <td>Opciones</td>
                 </tr>
             </thead>
@@ -40,10 +43,13 @@
                         <td>@item.Name</td>
                         <td>@item.FoodGroups.Replace("y", " y ")</td>
                         <td>
-                            @foreach (var value in item.ListProducts)
-                            {
-                                @value.Name
-                            }
+                            <select class="form-control">
+
+                                @foreach (var value in item.ListProducts)
+                                {
+                                    <option value="@value.Name">@value.Name</option>
+                                }
+                            </select>
                         </td>
                         <td>
                             <a asp-action="Delete" asp-route-id="@item.Id"

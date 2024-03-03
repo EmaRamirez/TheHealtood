@@ -16,6 +16,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\emanu\Manu\Portfolio\The Healtood\TheHealtood
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/emanu/Manu/Portfolio/The Healtood/TheHealtood/Views/Home/AllProducts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBbGxQcm9kdWN0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/emanu/Manu/Portfolio/The Healtood/TheHealtood/Views/Home/GetCarrito.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxHZXRDYXJyaXRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/emanu/Manu/Portfolio/The Healtood/TheHealtood/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

@@ -1,15 +1,77 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using TheHealtood.ViewModels;
+@model IEnumerable<HomeIndexViewModel>
+@{
+    ViewData["Title"] = "The Healtood";
+    List<string>valores = new List<string>(){
+        "Organiza tu almuerzo y cena de toda la semana","No hace falta una suscripcion ni afiliacion","Envios a CABA Y AMBA","Envios en 24hs"
+        };
 }
 
 <div class="text-center">
     <div>
-        <h1>The Healtood</h1>
+        <h1>@ViewBag.Title</h1>
     </div>
-    <div>
-        <p>Somos una empresa que nos especializamos en hacer comidas para toda la semana para las personas que
-            sus tiempos son muy acotados y no tienen la posibilidad de comer sano
-        </p>
-        <p>Entonces que estas esperando! Tenemos una gran variadad para todos los gustos</p>
+    <div class="body-container">
+        @*body-container ==> contiene todo hasta el section de los productos*@
+        <div class="princ-container">
+            @*princ-container ==> contiene todo el texto desde el come sano hasta el ultimo de la lista*@
+            <div class="text-container">
+                @*text-container ==> contiene los h2 que tiene subtitulos*@
+                <h2>Come Sano</h2>
+                <h2>Pedi ya!</h2>
+            </div>
+            <div class="princ-lista">
+                @*princ-lista ==> contiene la lista con su imagen de check*@
+               @foreach(var item in valores){
+                <div class="check-img-list">
+                <div class="check-img">
+                        <img src="\Images\icon-check.png" >
+                    </div>
+                    <div class="check-list">
+                        <li>@item</li>
+                    </div>
+                    </div>
+               }
+            </div>
+         
+        </div>
+
+
+        <div class="princImg-container">
+            @*princImg-container ==> contiene la imagen de las bandejas*@
+            <img src="\Images\Bandejas para llevar.jpeg" alt="">
+        </div>
     </div>
+<div class="line-Separate"></div>
+    <section class="section-container">
+        @foreach (var item in @Model)
+        {
+            <div class="container-info">
+                <div class="info-image">
+                    <img src="@item.url">
+                </div>
+                <div class="info-text">
+                    <h3>@item.name</h3>
+                    <p>@item.price</p>
+                </div>
+                <div>
+                    <p>Ingredientes:
+                        @foreach (var value in item.ingredients)
+                        {
+                            @(value.Name + ", ")
+                            ;
+                        }
+                    </p>
+                </div>
+                <div class="container-btn">
+                    <a asp-action="GetCarrito" asp-controller="Home" asp-route-id="@item.id" class="btn btn-warning"
+                        id="btn-add">Agregar al carrito</a>
+                </div>
+            </div>
+           
+        }
+        <div class="section-button">
+            <a asp-action="AllProducts" asp-controller="Home" class="btn btn-info">Ver mas</a>
+        </div>
+    </section>
 </div>

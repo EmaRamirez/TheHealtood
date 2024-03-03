@@ -1,0 +1,155 @@
+nav {
+    background-color: #37685C;
+}
+
+.body-container {
+    width: 1300px;
+    height: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.princ-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.text-container {
+    width: 100%;
+    height: 30%;
+}
+
+.text-container h2 {
+    width: 100%;
+    font-size: 40px;
+    color: #37685C;
+}
+
+.princ-lista {
+    width: 100%;
+    height: 70%;
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+}
+
+.princ-lista li {
+    list-style: none;
+    margin-top: 10px;
+    text-align: start;
+}
+
+.check-img-list {
+    display: flex;
+}
+
+.check-img {
+    width: 10%;
+    margin-top: 10px;
+}
+
+.check-img img {
+    width: 20px
+}
+
+.check-list {
+    width: 90%;
+}
+
+.princImg-container {
+    width: 50%;
+    height: 500px;
+    margin-top: 100px;
+}
+
+
+.princImg-container img {
+    width: 400px;
+    height: 80%;
+    box-shadow: -25px 25px 50px #bebebe,
+        25px -25px 50px #ffffff;
+    border-radius: 50px;
+}
+
+.line-Separate {
+    border: 1px solid #37685C;
+    width: 95%;
+    height: 0;
+    margin: 50px;
+    margin-left: 50px;
+
+}
+
+
+
+.section-container {
+    width: 1300px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+}
+
+.container-info {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 50px;
+    background: #e0e0e0;
+    box-shadow: -25px 25px 50px #bebebe,
+        25px -25px 50px #ffffff;
+    margin-top: 25px;
+}
+
+.container-info:hover {
+    transform: scale(1.1);
+}
+
+.info-image {
+    width: 400px;
+    height: auto;
+}
+
+.info-image img {
+    width: 99%;
+    height: 300px;
+    object-fit: contain;
+    border-radius: 50px;
+}
+
+
+
+.info-text {
+    width: 400px;
+    font-weight: 700;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.section-button {
+    width: 100%;
+}
+
+.section-button a {
+    width: 40%;
+    margin: 50px;
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+
+.container-btn {
+    margin: auto;
+}
+
+#btn-add {
+    width: 100%;
+}

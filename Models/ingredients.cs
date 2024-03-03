@@ -26,6 +26,7 @@ public class Ingredient
 
     [NotMapped]
     public bool seleted { get; set; } = false;
+    [Display(Name = "Menus con estos ingredientes")]
     public virtual List<Products> ListProducts { get; set; } = new List<Products>();
     public virtual List<ProductWithIngredients> ProductWithIngredients { get; set; } = new List<ProductWithIngredients>();
 

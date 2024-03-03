@@ -1,0 +1,17 @@
+.container {
+    width: 1300px;
+
+}
+
+.title-princ {
+    display: flex;
+    justify-content: space-between;
+}
+
+.line {
+    border: 1px solid black;
+    width: 75%;
+    height: 0;
+    margin: auto;
+}
+

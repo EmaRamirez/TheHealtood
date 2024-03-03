@@ -5,39 +5,48 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - TheHealtood</title>
+    <link rel="icon" href=" /Images/icons Port.png" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Producs/Edit.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Home/Index.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Home/AllProducts.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TheHealtood.styles.css" asp-append-version="true" />
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TheHealtood</a>
+    <header class="container-header">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-success-subtle border-bottom box-shadow mb-3 fs-3"
+            style="height: 90px;">
+            <div class="container-fluid ">
+                <a class="navbar-brand text-light fs-3" asp-area="" asp-controller="Home"
+                    asp-action="Index">TheHealtood</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between ">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home"
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home"
                                 asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Products"
+                            <a class="nav-link text-light" asp-area="" asp-controller="Products"
                                 asp-action="Index">Productos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Ingredients"
+                            <a class="nav-link text-light" asp-area="" asp-controller="Ingredients"
                                 asp-action="Index">Ingredientes</a>
                         </li>
                     </ul>
+                    <div class="nav-item" style="margin-right: 15px;">
+                        <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="GetCarrito"><img
+                                src="\Images\carrito.png" alt="" style="width: 30px;  "></a>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -50,7 +59,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - TheHealtood - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - TheHealtood -
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using SQLitePCL;
 using TheHealtood.Models;
 using TheHealtood.Repository;
 using TheHealtood.ViewModels;
@@ -22,6 +23,13 @@ public class IngredientsController : Controller
             listado = _IngreServ.GetAll(filter);
         }
 
+        for (var i = 0; i < listado.Count(); i++)
+        {
+            if (listado[i].ListProducts.Count() == 0)
+            {
+                listado[i].ListProducts.Add(new Products(0, "No hay menu con este ingrediente", 0, 1));
+            }
+        }
 
         var model = new IngredientIndexViewModel()
         {
@@ -45,7 +53,7 @@ public class IngredientsController : Controller
         {
             return View();
         }
-        
+
         var model = new Ingredient(obj.Name, obj.foodGroups.ToString());
 
         _IngreServ.Create(model);

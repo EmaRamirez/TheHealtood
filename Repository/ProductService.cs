@@ -43,7 +43,7 @@ public class ProductService : IProductService
             query = query.Where(x => x.Name.Contains(Filter));
         }
 
-        return query.Include(x => x.gallery).ToList();
+        return query.Include(x => x.gallery).Include(x => x.Ingredients).ToList();
     }
 
     public Products GetById(int id)

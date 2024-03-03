@@ -1,0 +1,42 @@
+@using TheHealtood.ViewModels;
+
+@model IEnumerable<HomeAllProductsViewModel>
+
+@{
+
+}
+<div class="container">
+    <div class="title-princ">
+        <h2>Platos Principales</h2>
+        <div class="line"></div>
+    </div>
+
+
+    <section class="section-container">
+        @foreach (var item in @Model)
+        {
+            <div class="container-info">
+                <div class="info-image">
+                    <img src="@item.url">
+                </div>
+                <div class="info-text">
+                    <h3>@item.name</h3>
+                    <p>@item.price</p>
+                </div>
+                <div>
+                    <p>Ingredientes:
+                        @foreach (var value in item.ingredients)
+                        {
+                            @(value.Name + ", ")
+                            ;
+                        }
+                    </p>
+                </div>
+                <div class="container-btn">
+                    <a asp-action="GetCarrito" asp-controller="Home" asp-route-id="@item.id" class="btn btn-warning"
+                        id="btn-add">Agregar al carrito</a>
+                </div>
+            </div>
+        }
+    </section>
+</div>
