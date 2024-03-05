@@ -1,0 +1,40 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@model IEnumerable<IdentityRole>
+
+@{
+
+
+
+
+}
+
+<div class="container">
+    <a asp-action="Create" class="btn btn-info">Agregar Rol</a>
+
+    <div class="border border-success p-2 mb-2 border-opacity-75 mx-auto p-2 ">
+        <h2>Roles y sus habilitaciones</h2>
+
+            @foreach (var item in @Model)
+            {
+                <h2>@item.Name</h2>
+                @if (item.Name == "Administrador")
+                {
+                    <span>Tiene acceso a toda la pagina en completo</span>
+                }
+                else if (item.Name == "Operador")
+                {
+                    <span>Tiene acceso a Productos e Ingredientes y poder modificarlos</span>
+                }
+                else
+                {
+                    <span>Solo tiene acceso al carrito para realizar su compra</span>
+                }
+
+            }
+   
+
+    </div>
+</div>

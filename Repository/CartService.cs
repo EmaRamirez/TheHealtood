@@ -7,8 +7,8 @@ namespace TheHealtood.Repository;
 
 public class CartService : ICartService
 {
-    private readonly TheHealtoodContext _context;
-    public CartService(TheHealtoodContext context)
+    private readonly ApplicationDbContext _context;
+    public CartService(ApplicationDbContext context)
     {
         this._context = context;
     }

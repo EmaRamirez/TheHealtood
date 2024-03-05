@@ -1,6 +1,7 @@
 ﻿using System.Data.Common;
 using System.Diagnostics;
 using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -13,13 +14,12 @@ namespace TheHealtood.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
     private readonly IProductService _productService;
     private readonly ICartService _cartService;
 
-    public HomeController(ILogger<HomeController> logger, IProductService productService, ICartService cartService)
+    public HomeController(IProductService productService, ICartService cartService)
     {
-        _logger = logger;
+
         this._productService = productService;
         this._cartService = cartService;
     }
@@ -46,16 +46,6 @@ public class HomeController : Controller
         return View(model);
     }
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return null;
-    }
 
     public IActionResult AllProducts()
     {
@@ -78,7 +68,7 @@ public class HomeController : Controller
 
         return View(model);
     }
-
+    [Authorize]
     public IActionResult GetCarrito(int? id)
     {
         if (id == null)
@@ -120,5 +110,5 @@ public class HomeController : Controller
         return View();
     }
 
-    
+
 }

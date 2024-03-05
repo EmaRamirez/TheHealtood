@@ -10,9 +10,9 @@ namespace TheHealtood.Repository;
 public class IngredientService : IIngredientService
 {
 
-    private readonly TheHealtoodContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public IngredientService(TheHealtoodContext context)
+    public IngredientService(ApplicationDbContext context)
     {
         this._context = context;
     }

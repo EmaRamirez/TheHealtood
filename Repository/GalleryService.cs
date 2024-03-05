@@ -5,8 +5,8 @@ namespace TheHealtood.Repository;
 
 public class GalleryService : IGalleryService
 {
-    private readonly TheHealtoodContext _context;
-    public GalleryService(TheHealtoodContext context)
+    private readonly ApplicationDbContext _context;
+    public GalleryService(ApplicationDbContext context)
     {
         this._context = context;
     }

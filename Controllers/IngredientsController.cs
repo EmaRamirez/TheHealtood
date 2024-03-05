@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SQLitePCL;
 using TheHealtood.Models;
@@ -5,7 +6,7 @@ using TheHealtood.Repository;
 using TheHealtood.ViewModels;
 
 namespace TheHealtood.Controllers;
-
+[Authorize(Roles ="Administrador,Operador")]
 public class IngredientsController : Controller
 {
     private readonly IIngredientService _IngreServ;
@@ -38,7 +39,7 @@ public class IngredientsController : Controller
 
         return View(model);
     }
-
+    [Authorize(Roles = "Administrador")]
     [HttpGet]
     public IActionResult Create()
     {

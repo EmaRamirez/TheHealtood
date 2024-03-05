@@ -1,10 +1,15 @@
 using System.IO.Compression;
 using Microsoft.EntityFrameworkCore;
 using TheHealtood.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace TheHealtood.Data;
 
-public class TheHealtoodContext : DbContext
+
+
+public class TheHealtoodContext : IdentityDbContext
 {
     public TheHealtoodContext(DbContextOptions<TheHealtoodContext> options) : base(options)
     {
@@ -56,3 +61,4 @@ public class TheHealtoodContext : DbContext
 
     }
 }
+

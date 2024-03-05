@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TheHealtood.Models;
@@ -7,7 +8,7 @@ using TheHealtood.ViewModels;
 
 
 namespace TheHealtood.Controllers;
-
+[Authorize(Roles = "Administrador,Operador")]
 public class ProductsController : Controller
 {
     private readonly IIngredientService _IngreServ;
@@ -36,6 +37,7 @@ public class ProductsController : Controller
 
         return View(model);
     }
+    [Authorize(Roles = "Administrador")]
     [HttpGet]
     public IActionResult Create()
     {
@@ -64,7 +66,7 @@ public class ProductsController : Controller
         return RedirectToAction("Index");
 
     }
-
+    [Authorize(Roles = "Administrador")]
     public IActionResult Delete(int id)
     {
 
@@ -85,7 +87,7 @@ public class ProductsController : Controller
         var model = new ProductsDetailViewModel(detail.Id, detail.Name, detail.Price, url, detail.Ingredients);
         return View(model);
     }
-
+    [Authorize(Roles = "Administrador")]
     [HttpGet]
     public IActionResult Edit(int id)
     {

@@ -1,0 +1,25 @@
+@using TheHealtood.ViewModels;
+
+@model IEnumerable<UserIndexViewModel>
+
+<div>
+   
+    <table class="table caption-top" style="width: 750px;">
+        <caption style="font-size: 40px;">Listado de Usuarios</caption>
+        <thead>
+            <tr>
+                <td>@Html.DisplayNameFor(x => x.Username)</td>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in @Model)
+            {
+                <tr>
+                    <td>@item.Username</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </table>
+</div>
