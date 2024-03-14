@@ -32,5 +32,6 @@
 
 <h2>Diagrama del Proyecto</h2>
 
-![Models The Healtood](https://github.com/EmaRamirez/TheHealtood/assets/101208377/9a5adfb0-6cb3-4a53-b011-076a8ca55585)
 
+
+![Models The Healtood](https://github.com/EmaRamirez/TheHealtood/assets/101208377/e943aba4-4abf-4cec-88ec-4fd0b2524538)
