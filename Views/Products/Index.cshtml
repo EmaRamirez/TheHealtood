@@ -9,6 +9,11 @@
     <div>
         <a asp-action="Create" class="btn btn-info">+</a>
     </div>
+    <div class="row" style="margin-top: 20px;">
+        <form asp-action="Index" method="get">
+            <input type="text" placeholder="Filtrar Poducto" name="Filter" class="form-control" style="width: 300px;">
+        </form>
+    </div>
     <div>
         <table class="table table">
             <thead>

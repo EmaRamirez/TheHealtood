@@ -2,17 +2,20 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheHealtood.Data;
 
 #nullable disable
 
-namespace TheHealtood.Data.Migrations
+namespace TheHealtood.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(TheHealtoodContext))]
+    [Migration("20240314022538_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
@@ -78,6 +81,10 @@ namespace TheHealtood.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
@@ -128,6 +135,10 @@ namespace TheHealtood.Data.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -213,15 +224,19 @@ namespace TheHealtood.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("TheHealtood.Models.Cart", b =>
+            modelBuilder.Entity("TheHealtood.Models.DetailsProduct", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("ProductId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                    b.Property<int>("SalesId")
+                        .HasColumnType("INTEGER");
 
-                    b.ToTable("Cart");
+                    b.HasKey("ProductId", "SalesId");
+
+                    b.HasIndex("SalesId");
+
+                    b.ToTable("DetailsProducts");
                 });
 
             modelBuilder.Entity("TheHealtood.Models.Gallery", b =>
@@ -288,9 +303,6 @@ namespace TheHealtood.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("CartId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("GalleryId")
                         .HasColumnType("INTEGER");
 
@@ -303,12 +315,43 @@ namespace TheHealtood.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CartId");
-
                     b.HasIndex("GalleryId")
                         .IsUnique();
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("TheHealtood.Models.Sales", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NroVoucher")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Sales");
+                });
+
+            modelBuilder.Entity("TheHealtood.Models.AspNetUsers", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.HasDiscriminator().HasValue("AspNetUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -362,6 +405,25 @@ namespace TheHealtood.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TheHealtood.Models.DetailsProduct", b =>
+                {
+                    b.HasOne("TheHealtood.Models.Products", "Products")
+                        .WithMany("DetailsProduct")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TheHealtood.Models.Sales", "Sales")
+                        .WithMany("ListProds")
+                        .HasForeignKey("SalesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Products");
+
+                    b.Navigation("Sales");
+                });
+
             modelBuilder.Entity("TheHealtood.Models.ProductWithIngredients", b =>
                 {
                     b.HasOne("TheHealtood.Models.Ingredient", "Ingredient")
@@ -383,25 +445,22 @@ namespace TheHealtood.Data.Migrations
 
             modelBuilder.Entity("TheHealtood.Models.Products", b =>
                 {
-                    b.HasOne("TheHealtood.Models.Cart", "Cart")
-                        .WithMany("ListProd")
-                        .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
                     b.HasOne("TheHealtood.Models.Gallery", "gallery")
                         .WithOne("Product")
                         .HasForeignKey("TheHealtood.Models.Products", "GalleryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Cart");
-
                     b.Navigation("gallery");
                 });
 
-            modelBuilder.Entity("TheHealtood.Models.Cart", b =>
+            modelBuilder.Entity("TheHealtood.Models.Sales", b =>
                 {
-                    b.Navigation("ListProd");
+                    b.HasOne("TheHealtood.Models.AspNetUsers", "User")
+                        .WithMany("ListSales")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TheHealtood.Models.Gallery", b =>
@@ -417,7 +476,19 @@ namespace TheHealtood.Data.Migrations
 
             modelBuilder.Entity("TheHealtood.Models.Products", b =>
                 {
+                    b.Navigation("DetailsProduct");
+
                     b.Navigation("ProductWithIngredients");
+                });
+
+            modelBuilder.Entity("TheHealtood.Models.Sales", b =>
+                {
+                    b.Navigation("ListProds");
+                });
+
+            modelBuilder.Entity("TheHealtood.Models.AspNetUsers", b =>
+                {
+                    b.Navigation("ListSales");
                 });
 #pragma warning restore 612, 618
         }

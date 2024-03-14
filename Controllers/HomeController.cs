@@ -15,13 +15,13 @@ namespace TheHealtood.Controllers;
 public class HomeController : Controller
 {
     private readonly IProductService _productService;
-    private readonly ICartService _cartService;
+    
 
-    public HomeController(IProductService productService, ICartService cartService)
+    public HomeController(IProductService productService)
     {
 
         this._productService = productService;
-        this._cartService = cartService;
+        
     }
 
     public IActionResult Index()
@@ -68,8 +68,8 @@ public class HomeController : Controller
 
         return View(model);
     }
-    [Authorize]
-    public IActionResult GetCarrito(int? id)
+    
+   /* public IActionResult GetCarrito(int? id)
     {
         if (id == null)
         {
@@ -110,5 +110,5 @@ public class HomeController : Controller
         return View();
     }
 
-
+*/
 }

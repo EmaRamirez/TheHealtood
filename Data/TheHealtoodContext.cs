@@ -1,30 +1,25 @@
-using System.IO.Compression;
-using Microsoft.EntityFrameworkCore;
-using TheHealtood.Models;
+﻿using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
+using TheHealtood.Models;
 
 namespace TheHealtood.Data;
 
-
-
 public class TheHealtoodContext : IdentityDbContext
 {
-    public TheHealtoodContext(DbContextOptions<TheHealtoodContext> options) : base(options)
+    public TheHealtoodContext(DbContextOptions<TheHealtoodContext> options)
+        : base(options)
     {
-
     }
     public DbSet<Products> Products { get; set; }
     public DbSet<Gallery> Gallery { get; set; }
 
     public DbSet<Ingredient> Ingredients { get; set; }
     public DbSet<ProductWithIngredients> ProductWithIngredients { get; set; }
+    public DbSet<Sales> Sales { get; set; }
 
-    public DbSet<Cart> Cart { get; set; }
-
-
-
+    public DbSet<DetailsProduct> DetailsProducts { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -33,15 +28,6 @@ public class TheHealtoodContext : IdentityDbContext
         .WithOne(x => x.Product)
         .IsRequired();
 
-        /*modelBuilder.Entity<Products>()
-        .HasMany(x => x.Ingredients)
-        .WithMany(x => x.ListProducts)
-        .UsingEntity(
-            "ProductWithIngredients",
-            m => m.HasOne(typeof(Ingredient)).WithMany().HasForeignKey("IngredientId").HasPrincipalKey(nameof(Ingredient.Id)),
-            n => n.HasOne(typeof(Products)).WithMany().HasForeignKey("ProductId").HasPrincipalKey(nameof(TheHealtood.Models.Products.Id)),
-            o => o.HasKey("ProductId", "IngredientId")
-        );*/
 
         modelBuilder.Entity<Ingredient>()
         .HasMany(x => x.ListProducts)
@@ -51,14 +37,20 @@ public class TheHealtoodContext : IdentityDbContext
            m => m.HasOne(x => x.Ingredient).WithMany(x => x.ProductWithIngredients).HasForeignKey(x => x.IngredientId).HasPrincipalKey(x => x.Id)
            );
 
-
-
         modelBuilder.Entity<Products>()
-        .HasOne(x => x.Cart)
-        .WithMany(x => x.ListProd)
-        .IsRequired(false)
-        .OnDelete(DeleteBehavior.NoAction);
+        .HasMany(x => x.Sales)
+        .WithMany(x => x.Products)
+        .UsingEntity<DetailsProduct>(
+        x => x.HasOne(x => x.Sales).WithMany(x => x.ListProds).HasForeignKey(x => x.SalesId).HasPrincipalKey(x => x.Id),
+        y => y.HasOne(y => y.Products).WithMany(y => y.DetailsProduct).HasForeignKey(y => y.ProductId).HasPrincipalKey(y => y.Id)
+        );
 
+        modelBuilder.Entity<Sales>()
+        .HasOne(x => x.User)
+        .WithMany(x => x.ListSales)
+        .IsRequired(false);
+
+        base.OnModelCreating(modelBuilder);
     }
 }
 

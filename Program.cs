@@ -6,19 +6,19 @@ using TheHealtood.Repository;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+var connectionString = builder.Configuration.GetConnectionString("TheHealtoodContext") ?? throw new InvalidOperationException("Connection string 'TheHealtoodContext' not found.");
+builder.Services.AddDbContext<TheHealtoodContext>(options =>
     options.UseSqlite(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>()
 .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<TheHealtoodContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IGalleryService, GalleryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IIngredientService, IngredientService>();
-builder.Services.AddScoped<ICartService, CartService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -12,10 +12,10 @@ namespace TheHealtood.Repository;
 public class ProductService : IProductService
 {
 
-    private readonly ApplicationDbContext _context;
+    private readonly TheHealtoodContext _context;
 
 
-    public ProductService(ApplicationDbContext context)
+    public ProductService(TheHealtoodContext context)
     {
         this._context = context;
 

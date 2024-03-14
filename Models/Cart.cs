@@ -1,5 +1,8 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace TheHealtood.Models;
 
+[NotMapped]
 public class Cart
 {
     public int Id { get; set; }
