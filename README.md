@@ -29,3 +29,9 @@
 
 <h2>Acceso al Proyecto</h2>
 <p>En Desarollo</p>
+
+<h2>Diagrama del Proyecto</h2>
+
+
+
+![Models The Healtood](https://github.com/EmaRamirez/TheHealtood/assets/101208377/e943aba4-4abf-4cec-88ec-4fd0b2524538)
