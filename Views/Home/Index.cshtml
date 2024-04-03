@@ -63,6 +63,11 @@
                         }
                     </p>
                 </div>
+                <div>
+                    <button  onclick="SumNum('+',@item.id)" class="btn btn-info">+</button>
+                    <span id="@item.id">1</span>
+                    <button  onclick="SumNum('-',@item.id)" class="btn btn-info">-</button>
+                </div>
                 <div class="container-btn">
                     <a asp-action="GetCarrito" asp-controller="Home" asp-route-id="@item.id" class="btn btn-warning"
                         id="btn-add">Agregar al carrito</a>
@@ -75,3 +80,6 @@
         </div>
     </section>
 </div>
+
+
+    

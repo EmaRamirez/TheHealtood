@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="~/css/Home/AllProducts.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Home/GetCarrito.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TheHealtood.styles.css" asp-append-version="true" />
+
 </head>
 
 <body>
@@ -64,13 +65,31 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - TheHealtood - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div class="container-footer">
+            <section id="footer-red_social">
+                <h2>The Healtood</h2>
+                <div id="link-red_social">
+                    <a href="https://es-es.facebook.com/" target="_blank"><img src="\Images\facebook.png" alt=""></a>
+                    <a href="https://www.instagram.com/" target="_blank"><img src="\Images\instagram.png" alt=""></a>
+                    <a href="#" target="_blank"><img src="\Images\whatsapp.png" alt=""></a>
+                    <a href="https://twitter.com/" target="_blank"><img src="\Images\twitter.png" alt=""></a>
+                </div>
+            </section>
+            <section id="link-contacto">
+                <h2 class="text-muted">Contacto</h2>
+                <ul>
+                    <li><a href="">Contacta con nosotros</a></li>
+
+                </ul>
+            </section>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/Home.js" asp-append-version="true"></script>
+
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

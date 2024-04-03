@@ -1,5 +1,8 @@
 
 using System.Reflection.Metadata.Ecma335;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.EntityFrameworkCore;
 using TheHealtood.Data;
 using TheHealtood.Models;
@@ -16,10 +19,19 @@ public class IngredientService : IIngredientService
     {
         this._context = context;
     }
-    public void Create(Ingredient obj)
+    public string Create(Ingredient obj)
     {
+        var verificar = GetAll().FirstOrDefault(x => x.Name.ToLower() == obj.Name.ToLower());
+        string valor = "";
+        if (verificar != null)
+        {
+            valor = "El ingrediente que intentas agregar ya existe en la base de datos";
+            return valor;
+        }
         _context.Ingredients.Add(obj);
         _context.SaveChanges();
+        valor = "Ok";
+        return valor;
     }
 
     public void Delete(int id)

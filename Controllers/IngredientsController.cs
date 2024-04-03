@@ -6,7 +6,7 @@ using TheHealtood.Repository;
 using TheHealtood.ViewModels;
 
 namespace TheHealtood.Controllers;
-[Authorize(Roles ="Administrador,Operador")]
+
 public class IngredientsController : Controller
 {
     private readonly IIngredientService _IngreServ;
@@ -39,12 +39,12 @@ public class IngredientsController : Controller
 
         return View(model);
     }
-    [Authorize(Roles = "Administrador")]
+
     [HttpGet]
     public IActionResult Create()
     {
-
-        return View();
+        var aviso = new IngredientCreateViewModel();
+        return View(aviso);
     }
 
     [HttpPost]
@@ -57,9 +57,22 @@ public class IngredientsController : Controller
 
         var model = new Ingredient(obj.Name, obj.foodGroups.ToString());
 
-        _IngreServ.Create(model);
+        string msj = _IngreServ.Create(model);
 
-        return RedirectToAction("Index");
+        if (msj == "Ok")
+        {
+            return RedirectToAction("Index");
+        }
+        var aviso = new IngredientCreateViewModel();
+        aviso.msj = msj;
+        return View("Create",aviso);
+
+
     }
 
+    public IActionResult Delete(int id)
+    {
+        _IngreServ.Delete(id);
+        return RedirectToAction("Index");
+    }
 }

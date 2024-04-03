@@ -8,7 +8,7 @@ using TheHealtood.ViewModels;
 
 
 namespace TheHealtood.Controllers;
-[Authorize(Roles = "Administrador,Operador")]
+
 public class ProductsController : Controller
 {
     private readonly IIngredientService _IngreServ;
@@ -37,11 +37,11 @@ public class ProductsController : Controller
 
         return View(model);
     }
-    [Authorize(Roles = "Administrador")]
+
     [HttpGet]
     public IActionResult Create()
     {
-        ViewData["ingredients"] = new SelectList(_IngreServ.GetAll(), "Id", "Name");
+        ViewData["ingredients"] = _IngreServ.GetAll() is null ? new List<Ingredient>() : new SelectList(_IngreServ.GetAll(), "Id", "Name");
 
         return View();
     }
@@ -50,23 +50,21 @@ public class ProductsController : Controller
     {
         if (!ModelState.IsValid)
         {
-            return View();
+            return RedirectToAction("Create");
         }
 
         var gallery = _GalleryServ.Create(obj.image);
 
         var ListIngre = _IngreServ.AddIngre(obj.IngredientsId);
-        var cart = new Cart();
 
-        var prod = new Products(obj.Name, obj.Price, gallery.GalleryId);
-        prod.Ingredients = ListIngre;
-        //prod.Cart = cart;
+        var prod = new Products(obj.Name, obj.Price, gallery.GalleryId, ListIngre);
+
 
         _ProductServ.Create(prod);
         return RedirectToAction("Index");
 
     }
-    [Authorize(Roles = "Administrador")]
+    
     public IActionResult Delete(int id)
     {
 
@@ -87,7 +85,7 @@ public class ProductsController : Controller
         var model = new ProductsDetailViewModel(detail.Id, detail.Name, detail.Price, url, detail.Ingredients);
         return View(model);
     }
-    [Authorize(Roles = "Administrador")]
+    
     [HttpGet]
     public IActionResult Edit(int id)
     {

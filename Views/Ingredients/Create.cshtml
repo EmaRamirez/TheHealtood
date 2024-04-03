@@ -10,10 +10,13 @@ new SelectListItem(value:"4",text:TheHealtood.Utils.FoodGroups.GrasasyAceites.To
 new SelectListItem(value:"5",text:TheHealtood.Utils.FoodGroups.AzucaresyDulces.ToString().Replace("y"," y "))
 };
 
+    string modelo = Model.msj is null ? " " : Model.msj;
+
 }
 <div style="width: 500px; margin:auto;">
     <div>
         <form method="post" asp-action="Create">
+            <span>@modelo</span>
             <div class="form-group">
                 <label asp-for="Name" class="form-label"></label>
                 <input type="text" asp-for="Name" class="form-control">

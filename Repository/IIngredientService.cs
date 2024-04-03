@@ -4,7 +4,7 @@ namespace TheHealtood.Repository;
 
 public interface IIngredientService
 {
-    void Create(Ingredient obj);
+    string Create(Ingredient obj);
 
     Ingredient GetById(int id);
 

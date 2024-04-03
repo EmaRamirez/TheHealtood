@@ -10,4 +10,7 @@ public class IngredientCreateViewModel
     public string Name { get; set; }
 
     public FoodGroups foodGroups { get; set; }
+
+    public string msj { get; set; } = string.Empty;
+    
 }
